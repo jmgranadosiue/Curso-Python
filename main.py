@@ -70,3 +70,5 @@ elif user_option == 'tijera':
     else:
         print('piedra gana a tijera')
         print('Computador ganó!')
+
+""" <Observación 1: Esta nota se incluye para indicar que algunos cambios en estos archivos se deben al trabajo ralizado en paralelo con GIT y GITHUB y que tienen por finalidad practicar los comandos de este software de control de versiones. """
