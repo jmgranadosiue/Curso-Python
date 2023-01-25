@@ -33,18 +33,9 @@ import random
 
 options = ('piedra', 'papel', 'tijera')
 
-computer_wins = 0
-user_wins = 0
-
 # Para obtener el sangrado (ó indentación) necesario para el loop while se utiliza tab
-rounds = 1
 
-while True:
-
-    print('*' * 10)
-    print('ROUND', rounds)
-    print('*' * 10)
-    
+def choose_options():
     user_option = input('Piedra, papel o tijera => ')
     # La línea a continuación puede agregarse para evitar que el código se vea afectado
     # por la forma en que el usuario ingresa el texto, combinando mayúsculas y minúsculas
@@ -53,7 +44,8 @@ while True:
     if not user_option in options:
         print('Esa opción no es válida')
         # La siguiente línea se incluye porque no es necesario ejecutar el resto del código
-        continue
+        # continue
+        return None, None
 
     # # La siguiente línea se modifica en la clase 28 para utilizar la librería random
     # computer_option = 'papel'
@@ -61,7 +53,9 @@ while True:
 
     print('User option => ', user_option)
     print('Computer option => ', computer_option)
+    return user_option, computer_option
 
+def check_rules(user_option,computer_option,user_wins,computer_wins):
     if user_option == computer_option:
         print('Empate!')
     elif user_option == 'piedra':
@@ -75,7 +69,7 @@ while True:
             computer_wins += 1
     elif user_option == 'papel':
         if computer_option == 'piedra':
-            print ('papel gana a tijera')
+            print ('papel gana a piedra')
             print ('usuario ganó!')
             user_wins += 1
         else:
@@ -91,17 +85,33 @@ while True:
             print('piedra gana a tijera')
             print('Computador ganó!')
             computer_wins += 1
-    
-    print('Puntos para la computadora: ', computer_wins)
-    print('Puntos para el usuario: ', user_wins)
+    return user_wins, computer_wins
 
-    if computer_wins == 2:
-        print('El ganador es la computadora')
-        break
-    if user_wins == 2:
-        print('El ganador es el usuario')
-        break
+def run_game():
+    computer_wins = 0
+    user_wins = 0
+    rounds = 1
 
-    rounds += 1
+    while True:
+
+        print('*' * 10)
+        print('ROUND', rounds)
+        print('*' * 10)
+        rounds += 1
+
+        user_option, computer_option = choose_options()
+        user_wins, computer_wins = check_rules(user_option,computer_option,user_wins,computer_wins)
+        
+        print('Puntos para la computadora: ', computer_wins)
+        print('Puntos para el usuario: ', user_wins)
+
+        if computer_wins == 2:
+            print('El ganador es la computadora')
+            break
+        if user_wins == 2:
+            print('El ganador es el usuario')
+            break
+
+run_game()
 
 """ <Observación 1: Esta nota se incluye para indicar que algunos cambios en estos archivos se deben al trabajo ralizado en paralelo con GIT y GITHUB y que tienen por finalidad practicar los comandos de este software de control de versiones. """
